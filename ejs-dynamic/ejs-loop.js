@@ -15,9 +15,14 @@ app.get('/profile',(_,res)=>{
     const user={
         name: 'Pinky',
         email:'mrfrontend@gmail.com',
-        city:'Kanpur'
+        city:'Kanpur',
+        skills:['MongoDb','Js','Jquery','Nodejs']
     }
     res.render(`${publicPath}/views/profile.ejs`,{user});
+})
+
+app.get('/login',(_,res)=>{
+    res.render(`${publicPath}/views/login.ejs`)
 })
 
 
