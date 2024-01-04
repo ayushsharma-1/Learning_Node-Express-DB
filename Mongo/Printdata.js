@@ -17,3 +17,14 @@ const  main=async ()=>{
     console.log(dataArray);
 }
 main();
+
+
+// For individual
+
+// const  main=async ()=>{
+//     console.log('main function called')
+//     var data =await dbConnect();
+//     const dataArray= await data.find({"name":"Bakri"}).toArray();
+//     console.log(dataArray);
+// }
+// main();
