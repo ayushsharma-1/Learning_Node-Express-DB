@@ -1,8 +1,8 @@
 {
   "name": "nodejs",
   "version": "1.0.0",
-  "description": "",
-  "main": "1-intro.js",
+  "description": "**Learning Node.js**\r Node.js is a powerful runtime environment that enables you to run JavaScript on the server side. Built on the V8 JavaScript runtime, it has become a popular choice for building scalable and high-performance web applications.",
+  "main": "mongo2.js",
   "scripts": {
     "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -20,5 +20,6 @@
     "mongodb": "^6.3.0",
     "mongoose": "^8.0.3",
     "nodemon": "^3.0.2"
-  }
+  },
+  "devDependencies": {}
 }
