@@ -1,5 +1,4 @@
-const mongodb = require('./mongodbtry')
-console.log(__dirpath,'mongodbtry.js')
+const mongodb = require('./mongocall.js')
 async function insert (){
     let db=await mongodb()
     db.insertOne({"name":"Bakri"})
