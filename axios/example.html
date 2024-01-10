@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axios Example</title>
+</head>
+<body>
+
+    <div id="posts-container">
+        <h2>Posts:</h2>
+        <ul id="posts-list"></ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        // Function to fetch posts and display them on the webpage
+        async function fetchAndDisplayPosts() {
+            const postsContainer = document.getElementById('posts-container');
+            const postsList = document.getElementById('posts-list');
+
+            try {
+                // Make a GET request to fetch posts from the JSONPlaceholder API
+                const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
+                
+                // Extract the posts from the response
+                const posts = response.data;
+
+                // Clear existing posts
+                postsList.innerHTML = '';
+
+                // Display each post in an <li> element
+                posts.forEach(post => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${post.title} - ${post.body}`;
+                    postsList.appendChild(listItem);
+                });
+
+                // Show the posts container
+                postsContainer.style.display = 'block';
+            } catch (error) {
+                // Handle errors
+                console.error('Error fetching posts:', error);
+                postsContainer.innerHTML = '<p>Error fetching posts. Please try again later.</p>';
+            }
+        }
+
+        // Call the function to fetch and display posts when the page loads
+        document.addEventListener('DOMContentLoaded', fetchAndDisplayPosts);
+    </script>
+</body>
+</html>
