@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Form</title>
+</head>
+<body>
+    <form id="signupForm">
+
+        <label for="Contact"></label>
+        <input type="text" id="Contact" required placeholder="E-mail or Phone number">
+
+        <label for="newPassword"></label>
+        <input type="password" id="newPassword" required placeholder="Enter your password">
+
+        <button type="button" onclick="signup()" id="button1">SIGN UP</button>
+        <div class="signin"><a href="signin.html">Already have an account? Sign In</a></div>
+    </form>
+
+    <script>
+        function signup() {
+            // Get form values
+            const contact = document.getElementById('Contact').value;
+            const password = document.getElementById('newPassword').value;
+
+            const existingData = localStorage.getItem('userLogins') || '[]';
+            const userDataArray = JSON.parse(existingData);
+
+            // Create JSON object for the new user
+            const userData = {
+                contact: contact,
+                password: password
+            };
+
+            // Add the new user data to the array
+            userDataArray.push(userData);
+
+            // Save the updated array back to localStorage
+            localStorage.setItem('userLogins', JSON.stringify(userDataArray));
+
+            // Optional: Display the stored data in the console for debugging
+            console.log('Data stored:', userDataArray);
+
+            // Send data to the server (Node.js) for handling
+            sendDataToServer(JSON.stringify(userData));
+        }
+
+        function sendDataToServer(data) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/signup', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        console.log('Data successfully submitted:', data);
+                    } else {
+                        console.error('Error submitting data:', xhr.status, xhr.statusText);
+                    }
+                }
+            };
+            xhr.send(data);
+        }
+    </script>
+</body>
+</html>
