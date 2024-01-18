@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Image and Location</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY=initMap"></script>
+    <style>
+        #map {
+            height: 300px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Upload Image and Location</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data" onsubmit="submitForm()">
+        <label for="folderName">Enter Folder Name:</label>
+        <input type="text" id="folderName" name="folderName" required>
+        <br>
+        <label for="image">Choose Image:</label>
+        <input type="file" id="image" name="image" accept="image/*" required>
+        <br>
+
+        <label for="location">Location:</label>
+        <input type="text" name="location" id="location" placeholder="Enter location" required>
+
+        <input type="hidden" name="latitude" id="latitude">
+        <input type="hidden" name="longitude" id="longitude">
+
+        <div id="map"></div>
+
+        <button type="submit">Upload Image and Submit Location</button>
+    </form>
+
+    <script>
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: new google.maps.LatLng(-33.863276, 151.207977),
+                zoom: 12
+            });
+    
+            const marker = new google.maps.Marker({
+                map,
+                draggable: true
+            });
+    
+            const autocomplete = new google.maps.places.Autocomplete(document.getElementById('location'));
+    
+            autocomplete.addListener('place_changed', () => {
+                const place = autocomplete.getPlace();
+                if (!place.geometry) {
+                    return;
+                }
+    
+                const location = place.geometry.location;
+                marker.setPosition(location);
+                document.getElementById('latitude').value = location.lat();
+                document.getElementById('longitude').value = location.lng();
+            });
+    
+            google.maps.event.addListener(map, 'click', (event) => {
+                marker.setPosition(event.latLng);
+                document.getElementById('latitude').value = event.latLng.lat();
+                document.getElementById('longitude').value = event.latLng.lng();
+            });
+        }
+    
+        document.addEventListener('DOMContentLoaded', () => {
+            initMap();
+        });
+    </script>
+</body>
+</html>
+
