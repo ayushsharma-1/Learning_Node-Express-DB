@@ -16,7 +16,7 @@ const transporter = nodemailer.createTransport({
   secure: false,
   auth: {
     user: 'ayushsharma1010@outlook.com',
-    pass: 'ntqtnrrkuxdetqlv', // Use your App Password here
+    pass: '', // Use your App Password here
   },
   debug: true,
 });
