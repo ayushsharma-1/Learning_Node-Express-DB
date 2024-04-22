@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="/css/front.css">
+</head>
+<body>
+    <h1 id="heading">Registration Form</h1>
+    <form action="/register" method="POST">
+        <input type="text" id="Fname" name="first_name" placeholder="First Name" required /><br /><br />
+        <input type="text" id="Lname" name="last_name" placeholder="Last Name" required /><br /><br />
+        <input type="email" id="email" name="email" placeholder="Email" required />
+        <input type="password" id="password" name="password" placeholder="Password" pattern=".{8,}" title="Password must be at least 8 characters long" required /><br /><br />
+        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required />
+        <select id="countryCode" name="countryCode">
+            <option value="+91">India (+91)</option>
+            <option value="+1">USA (+1)</option>
+            <option value="+44">UK (+44)</option>
+        </select>
+        <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Phone Number" pattern="[0-9]{10}" title="Phone number must be 10 digits" required /><br /><br />
+        <input type="radio" id="male" name="gender" value="male">
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="gender" value="female">
+        <label for="female">Female</label><br><br>
+        {{#if errors}}
+        <ul>
+            {{#each errors}}
+            <li>{{this}}</li>
+            {{/each}}
+        </ul>
+        {{/if}}
+        <input type="submit" value="Register" />
+    </form>
+    <script src="/js/front.js"></script>
+</body>
+</html>

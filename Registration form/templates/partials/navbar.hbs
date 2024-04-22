@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Menu Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #F4BD50;
+            --background: #191919;
+            --navbar-height: 48px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Poppins;
+        }
+
+        .background {
+            display: block;
+            width: 100vw;
+            height: 100vh;
+            opacity: 1;
+            z-index: 1;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .menu__wrapper {
+            display: flex;
+            position: relative;
+            flex-direction: row;
+            z-index: 2;
+        }
+
+        .menu__bar {
+            position: fixed;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: row;
+            padding: 0 16px;
+            gap: 32px;
+            background-color: var(--background);
+            height: 60px;
+            opacity: 0.9;
+
+        }
+
+        .menu-icon {
+            cursor: pointer;
+            display: flex;
+            height: 32px;
+            width: 32px;
+        }
+
+        .navigation {
+            display: flex;
+            flex-direction: row;
+            list-style-type: none;
+            align-items: center;
+            gap: 24px;
+            padding: 0px;
+            background-color: var(--background);
+        }
+
+        .logo svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .navigation>li {
+            display: flex;
+            position: relative;
+            cursor: pointer;
+            font-size: 1.25rem;
+        }
+
+        .navigation>li>a {
+            color: white;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-weight: 500;
+            background-image: linear-gradient(to right,
+                    var(--primary),
+                    var(--primary) 50%,
+                    white 50%);
+            background-size: 200% 100%;
+            background-position: -100%;
+            display: inline-block;
+            padding: 3px 0;
+            position: relative;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .navigation>li>a:before {
+            content: '';
+            background: var(--primary);
+            display: block;
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .navigation>li>a:hover {
+            background-position: 0;
+        }
+
+        .navigation>li>a:hover::before {
+            width: 100%;
+        }
+
+        @media (min-width: 600px) {
+            .menu-icon {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .navigation {
+                display: none;
+            }
+
+            .menu-icon {
+                display: block;
+            }
+
+            .navigation--mobile {
+                top: var(--navbar-height);
+                position: absolute;
+                right: 0px;
+                display: flex;
+                padding: 80px 60px;
+                min-height: 100%;
+                background-color: var(--background);
+                gap: 8px;
+                flex-direction: column;
+                align-items: flex-start;
+                opacity: 0.95;
+                animation: fadein 0.3s forwards;
+            }
+
+            @keyframes fadein {
+                0% {
+                    opacity: 0;
+                    width: 0;
+                    height: 0;
+                }
+
+                100% {
+                    opacity: 1;
+                    width: 100%;
+                    height: calc(100vh - var(--navbar-height));
+                }
+            }
+
+            .navigation--mobile--fadeout {
+                animation: fadeout 300ms forwards;
+            }
+
+            @keyframes fadeout {
+                0% {
+                    opacity: 1;
+                    width: 100%;
+                    height: calc(100vh - var(--navbar-height));
+                }
+
+                100% {
+                    opacity: 0;
+                    width: 0;
+                    height: 0;
+                }
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background">
+        <div class="menu__wrapper">
+            <div class="menu__bar">
+                <a href="#" title="Logo" class="logo">
+                    <svg width="1103" height="996" viewBox="0 0 1103 996" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M410.988 255.56L0 995.337H189.802L505.141 427.427L410.988 255.56ZM1102.94 995.337L647.119 170.373L551.471 0L457.317 170.373L551.471 340.746L711.79 629.718H498.683L405.461 786.972H799.034L914.634 995.337H1102.94Z"
+                            fill="#FAFBFC" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M410.988 255.56L0 995.337H189.802L505.141 427.427L410.988 255.56ZM1102.94 995.337L647.119 170.373L551.471 0L457.317 170.373L551.471 340.746L711.79 629.718H498.683L405.461 786.972H799.034L914.634 995.337H1102.94Z"
+                            fill="#FAFBFC" />
+                    </svg>
+
+                </a>
+                <img class="menu-icon" src="assets/burger-menu.svg" title='Burger Menu' alt='Burger Menu'
+                    onclick="toggleMenu(this)">
+                <ul class="navigation">
+                    <li>
+                        <a href="#services" title="Services">
+                            Services
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#blog" title="Blog">
+                            Blog
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#about" title="About">
+                            About
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#contact-us" title="Contact Us">
+                            Contact Us
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- <script src="script.js"></script> -->
+    <script>
+        const toggleMenu = () => {
+            const navigation = document.querySelector(".navigation");
+
+            const burgerMenu = document.querySelector(".menu-icon");
+            const src = burgerMenu.getAttribute("src");
+
+            const isBurger = src === "assets/burger-menu.svg";
+            const iconName = isBurger ? "assets/close.svg" : "assets/burger-menu.svg";
+
+            burgerMenu.setAttribute("src", iconName);
+
+            if (!isBurger) {
+                navigation.classList.add("navigation--mobile--fadeout");
+                setTimeout(() => {
+                    navigation.classList.toggle("navigation--mobile");
+                }, 300);
+            } else {
+                navigation.classList.remove("navigation--mobile--fadeout");
+                navigation.classList.toggle("navigation--mobile");
+            }
+        };
+
+    </script>
+</body>
+
+</html>
